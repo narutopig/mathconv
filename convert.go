@@ -6,6 +6,10 @@ import (
 
 // Convert converts an int64 to a string
 func Convert(num int64) string {
+	if num == 0 {
+		return "zero"
+	}
+
 	res := []int{}
 	n := num
 
@@ -20,7 +24,15 @@ func Convert(num int64) string {
 
 	for i, val := range res {
 		if val != 0 {
-			stuff = append(stuff, toString(val)+" "+TensPower[3*(len(res)-i-1)])
+			tensPower := 3 * (len(res) - i - 1)
+
+			thing := toString(val)
+
+			if tensPower > 0 {
+				thing += " " + TensPower[tensPower]
+			}
+
+			stuff = append(stuff, thing)
 		}
 	}
 
